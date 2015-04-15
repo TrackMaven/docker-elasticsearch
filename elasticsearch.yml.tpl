@@ -35,7 +35,10 @@ node.data: true
 #
 # Set this property to true to lock the memory:
 #
+
+{% if MLOCKALL is defined %}
 bootstrap.mlockall: true
+{% endif %}
 
 
 ################################## Discovery ##################################

@@ -13,12 +13,6 @@ RUN \
   rm -f elasticsearch-1.4.4.tar.gz && \
   mv /tmp/elasticsearch-1.4.4 /elasticsearch
 
-# Define mountable directories.
-VOLUME ["/data"]
-
-# Define working directory.
-WORKDIR /data
-
 EXPOSE 9200
 EXPOSE 9300
 
