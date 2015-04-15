@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+envtpl --allow-missing -o /elasticsearch/config/elasticsearch.yml  /elasticsearch/config/elasticsearch.yml.tpl
+
+exec /elasticsearch/bin/elasticsearch ${*:1}
