@@ -1,6 +1,10 @@
-# Elasticsearch docker image
+# ElasticSearch
 
-AWS-specific Elasticsearch docker image
+An AWS specific ElasticSearch docker container.
 
-pull latest image from: `quay.io/trackmaven/elasticsearch`
-run with: `docker run -v es/data:/elasticsearch/data -v es/logs:/elasticsearch/logs`
+Available from [`quay.io/trackmaven/elasticsearch'](http://quay.io/trackmaven/elasticsearch)
+
+Run with...
+```
+docker run -v es/data:/elasticsearch/data -v es/logs:/elasticsearch/logs
+```
