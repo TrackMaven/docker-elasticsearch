@@ -1,17 +1,14 @@
-# ElasticSearch Dockerfile
-# https://github.com/dockerfile/elasticsearch
-#
+FROM java:8-jre
 
-# Pull base image.
-FROM dockerfile/java
+ENV ES_VERSION 1.7.3
 
 # Install ElasticSearch.
 RUN \
   cd /tmp && \
-  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.4.tar.gz && \
-  tar xvzf elasticsearch-1.4.4.tar.gz && \
-  rm -f elasticsearch-1.4.4.tar.gz && \
-  mv /tmp/elasticsearch-1.4.4 /elasticsearch
+  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz && \
+  tar xvzf elasticsearch-${ES_VERSION}.tar.gz && \
+  rm -f elasticsearch-${ES_VERSION}.tar.gz && \
+  mv /tmp/elasticsearch-${ES_VERSION} /elasticsearch
 
 # Define mountable directories.
 VOLUME ["/data"]
@@ -30,10 +27,12 @@ RUN apt-get -y install python-pip
 RUN pip install envtpl
 
 # Add etcdenv
-ADD https://github.com/cameronmaske/etcdenv/releases/download/exit/etcdenv-linux-amd64-exit /usr/local/bin/etcdenv
+ADD https://github.com/upfluence/etcdenv/releases/download/v0.3.1/etcdenv-linux-amd64-0.3.1 /usr/local/bin/etcdenv
 RUN chmod +x /usr/local/bin/etcdenv
 
 ADD elasticsearch.yml.tpl /elasticsearch/config/elasticsearch.yml.tpl
 
 ADD run /usr/local/bin/run
 RUN chmod +x /usr/local/bin/run
+
+CMD run

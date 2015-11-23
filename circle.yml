@@ -1,0 +1,11 @@
+machine:
+  services:
+    - docker
+dependencies:
+  override:
+    - docker info
+    - docker build -t quay.io/trackmaven/elasticsearch .
+test:
+  override:
+    - docker run -d --publish 9200:9200 --env ES_CLUSTER_NAME=hello --env ES_NODE_NAME=test --name=elasticsearch quay.io/trackmaven/elasticsearch; sleep 10
+    - curl --fail -i http://localhost:9200

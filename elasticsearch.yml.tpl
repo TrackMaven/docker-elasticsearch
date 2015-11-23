@@ -3,7 +3,7 @@
 # Cluster name identifies your cluster for auto-discovery. If you're running
 # multiple clusters on the same network, make sure you're using unique names.
 #
-cluster.name: {{ CLUSTER_NAME | default("elasticsearch") }}
+cluster.name: "elasticsearch"
 
 
 #################################### Node #####################################
@@ -11,9 +11,7 @@ cluster.name: {{ CLUSTER_NAME | default("elasticsearch") }}
 # Node names are generated dynamically on startup, so you're relieved
 # from configuring them manually. You can tie this node to a specific name:
 #
-{% if NODE_NAME is defined %}
-node.name: {{ NODE_NAME }}
-{% elif NODE_MASTER is defined %}
+{% if NODE_MASTER is defined %}
 node.master: true
 node.data: false
 {% elif NODE_DATA is defined %}
@@ -42,17 +40,3 @@ bootstrap.mlockall: true
 
 discovery.zen.ping.multicast.enabled: false
 
-##################################### EC2 #####################################
-
-{% if DISCOVERY == "ec2" %}
-cloud:
-    aws:
-        region: {{ AWS_REGION }}
-        access_key: {{ AWS_ACCESS_KEY }}
-        secret_key: {{ AWS_SECRET_KEY }}
-
-discovery:
-  type: ec2
-  ec2:
-    groups: {{ AWS_GROUP }}
-{% endif %}
