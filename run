@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-envtpl --allow-missing -o /elasticsearch/config/elasticsearch.yml  /elasticsearch/config/elasticsearch.yml.tpl
+envtpl --keep-template --allow-missing -o /elasticsearch/config/elasticsearch.yml  /elasticsearch/config/elasticsearch.yml.tpl
 
 ES_CFG_FILE="/elasticsearch/config/elasticsearch.yml"
 
