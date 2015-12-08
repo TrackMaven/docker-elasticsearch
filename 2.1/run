@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+envtpl --keep-template --allow-missing -o /elasticsearch/config/elasticsearch.yml  /elasticsearch/config/elasticsearch.yml.tpl
+
+ES_CFG_FILE="/elasticsearch/config/elasticsearch.yml"
+
+# Process environment variables
+for VAR in `env`; do
+  if [[ "$VAR" =~ ^ES_ && ! "$VAR" =~ ^ES_CFG_ && ! "$VAR" =~ ^ES_PLUGIN_ && ! "$VAR" =~ ^ES_HOME && ! "$VAR" =~ ^ES_VERSION && ! "$VAR" =~ ^ES_VOL && ! "$VAR" =~ ^ES_USER && ! "$VAR" =~ ^ES_GROUP ]]; then
+    ES_CONFIG_VAR=$(echo "$VAR" | sed -r "s/ES_(.*)=.*/\1/g" | tr '[:upper:]' '[:lower:]' | tr _ . | sed  -r "s/\.\./_/g")
+    ES_ENV_VAR=$(echo "$VAR" | sed -r "s/(.*)=.*/\1/g")
+
+    if egrep -q "(^|^#)$ES_CONFIG_VAR" $ES_CFG_FILE; then
+      # No config values may contain an '@' char. Below is due to bug otherwise seen.
+      sed -r -i "s@(^|^#)($ES_CONFIG_VAR): (.*)@\2: ${!ES_ENV_VAR}@g" $ES_CFG_FILE
+    else
+      echo "$ES_CONFIG_VAR: ${!ES_ENV_VAR}" >> $ES_CFG_FILE
+    fi
+  fi
+done
+
+# Some volumes when synced (specifically with docker-machine) won't allow
+# ownership to be changed. In this case, a user can override the default behaviour
+# but setting the env var SKIP_CHOWN_DATA
+if [ -z "$SKIP_CHOWN_DATA" ]; then
+  chown -R elasticsearch:elasticsearch /elasticsearch/data
+fi
+
+exec gosu elasticsearch /elasticsearch/bin/elasticsearch ${*:1}
