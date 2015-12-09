@@ -4,8 +4,12 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build -t quay.io/trackmaven/elasticsearch .
+    - docker build -t quay.io/trackmaven/elasticsearch:1.7 1.7
+    - docker build -t quay.io/trackmaven/elasticsearch:2.1 2.1
 test:
   override:
-    - docker run -d --publish 9200:9200 --env ES_CLUSTER_NAME=hello --env ES_NODE_NAME=test --name=elasticsearch quay.io/trackmaven/elasticsearch; sleep 20
-    - curl --fail -i http://localhost:9200
+    - docker run -d --publish 9217:9200 --env ES_CLUSTER_NAME=hello --env ES_NODE_NAME=test --name=elasticsearch-1 quay.io/trackmaven/elasticsearch:1.7;
+    - docker run -d --publish 9221:9200 --env ES_NETWORK_BIND__HOST=0.0.0.0 --env ES_CLUSTER_NAME=hello --env ES_NODE_NAME=test --name=elasticsearch-2 quay.io/trackmaven/elasticsearch:2.1;
+    - sleep 20
+    - curl --fail -i http://localhost:9217
+    - curl --fail -i http://localhost:9221
