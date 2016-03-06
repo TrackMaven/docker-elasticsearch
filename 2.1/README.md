@@ -1,6 +1,6 @@
 # Elasticsearch
 
-An [2.1.0](https://www.elastic.co/guide/en/elasticsearch/reference/2.1/release-notes-2.1.0.html) Elasticsearch docker image for AWS deployments.
+An [2.1.2](https://www.elastic.co/guide/en/elasticsearch/reference/current/release-notes-2.1.2.html) Elasticsearch docker image for AWS deployments.
 
 # Quick Start
 

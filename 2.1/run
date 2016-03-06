@@ -15,6 +15,8 @@ for VAR in `env`; do
       # No config values may contain an '@' char. Below is due to bug otherwise seen.
       sed -r -i "s@(^|^#)($ES_CONFIG_VAR): (.*)@\2: ${!ES_ENV_VAR}@g" $ES_CFG_FILE
     else
+      # For some reason, not adding correct newline to config file
+      echo  >> $ES_CFG_FILE
       echo "$ES_CONFIG_VAR: ${!ES_ENV_VAR}" >> $ES_CFG_FILE
     fi
   fi

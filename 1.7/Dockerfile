@@ -22,7 +22,7 @@ EXPOSE 9300
 # Elasticsearch plugins woop!
 RUN /elasticsearch/bin/plugin install elasticsearch/elasticsearch-cloud-aws/2.7.1
 
-RUN apt-get update
+RUN apt-get update --fix-missing
 RUN apt-get -y install python-pip
 RUN pip install envtpl
 
