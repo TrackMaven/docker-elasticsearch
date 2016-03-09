@@ -13,3 +13,9 @@ test:
     - sleep 20
     - curl --fail -i http://localhost:9217
     - curl --fail -i http://localhost:9221
+deployment:
+  master:
+    branch: "master"
+    commands:
+      - docker login -u $DOCKER_USER -p $DOCKER_PASS -e "$DOCKER_EMAIL" quay.io
+      - ./release.sh
