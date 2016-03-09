@@ -20,5 +20,5 @@ deployment:
       - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD -e "$DOCKER_EMAIL" quay.io
       - docker push quay.io/trackmaven/elasticsearch:1.7
       - docker push quay.io/trackmaven/elasticsearch:2.1
-      - docker tag quay.io/trackmaven/elasticsearch:2.1.2 quay.io/trackmaven/elasticsearch:2.1.2
+      - docker tag quay.io/trackmaven/elasticsearch:2.1 quay.io/trackmaven/elasticsearch:2.1.2
       - docker push quay.io/trackmaven/elasticsearch:2.1.2
