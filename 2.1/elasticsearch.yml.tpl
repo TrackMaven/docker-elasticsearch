@@ -39,4 +39,3 @@ bootstrap.mlockall: true
 ################################## Discovery ##################################
 
 discovery.zen.ping.multicast.enabled: false
-
