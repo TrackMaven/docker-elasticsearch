@@ -1,7 +1,0 @@
-#!/bin/bash
-set -e
-
-docker push quay.io/trackmaven/elasticsearch:1.7
-docker push quay.io/trackmaven/elasticsearch:2.1
-docker build --no-cache -t quay.io/trackmaven/elasticsearch:2.1.2 2.1.2
-docker push quay.io/trackmaven/elasticsearch:2.1.2
