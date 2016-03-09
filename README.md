@@ -6,7 +6,6 @@ Supported tags and respective README/Dockerfile links.
 
 * `1.7` ([README](1.7/README.md)) ([Dockerfile](1.7/Dockerfile))
 * `2.1` ([README](2.1/README.md)) ([Dockerfile](2.1/Dockerfile))
-* `2.1.2` ([README](2.1.2/README.md)) ([Dockerfile](2.1.2/Dockerfile))
 
 ## Quickstart
 
@@ -16,8 +15,5 @@ docker run --publish 9200:9200 quay.io/trackmaven/elasticsearch:2.1.2
 
 ## Release checklist
 
-Release off master.
-
-* Ensure tests are passing.
-* Login with docker to `quay.io`
-* Run `sh release.sh `
+Deployment to `quay.io` is handled by CirleCI.
+If a version bump, update the release script in the circle.yml
