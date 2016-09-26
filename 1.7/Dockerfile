@@ -1,6 +1,6 @@
 FROM java:8-jre
 
-ENV ES_VERSION 1.7.3
+ENV ES_VERSION 1.7.5
 
 # Install ElasticSearch.
 RUN \
