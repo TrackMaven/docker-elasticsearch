@@ -1,6 +1,6 @@
 # Elasticsearch
 
-An [1.7.3](https://www.elastic.co/blog/elasticsearch-1-7-3-released) elasticsearch docker image for AWS deployments.
+An [1.7.5](https://www.elastic.co/downloads/past-releases/elasticsearch-1-7-5) elasticsearch docker image for AWS deployments.
 
 
 # Quick Start
