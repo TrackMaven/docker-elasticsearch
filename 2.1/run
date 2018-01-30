@@ -22,6 +22,8 @@ for VAR in `env`; do
   fi
 done
 
+ulimit -l unlimited
+
 # Some volumes when synced (specifically with docker-machine) won't allow
 # ownership to be changed. In this case, a user can override the default behaviour
 # but setting the env var SKIP_CHOWN_DATA
